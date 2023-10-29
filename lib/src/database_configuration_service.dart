@@ -3,9 +3,12 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'models/collection_response.dart';
 import 'models/database_response.dart';
 
-/// Service to create the Appwrite Database Configuration
+/// Service to create the Appwrite database configuration
 class DatabaseConfigurationService {
   /// Default Constructor
+  ///
+  /// Requires an Appwrite [Databases] object to read the databases and its
+  /// collections in the Appwrite project.
   DatabaseConfigurationService({
     required Databases databases,
   }) : _databases = databases;
@@ -13,7 +16,7 @@ class DatabaseConfigurationService {
   late final Databases _databases;
   final List<DatabaseResponse> _projectDatabases = List.empty(growable: true);
 
-  /// Create Appwrite Database Configuration
+  /// Create Appwrite database configuration
   Future<List<DatabaseResponse>> create() async {
     await readDatabases();
     await readDatabaseCollections();
@@ -21,7 +24,7 @@ class DatabaseConfigurationService {
     return _projectDatabases;
   }
 
-  /// Read all Databases in Appwrite Project
+  /// Read all databases in Appwrite project
   Future<void> readDatabases() async {
     final databases = await _databases.list();
 
@@ -30,9 +33,7 @@ class DatabaseConfigurationService {
     }
   }
 
-  // b3702b6afd3442fcbec49bc7f8ea6c14
-
-  /// Read all Collections in Appwrite Databases
+  /// Read collections in Appwrite Databases
   Future<void> readDatabaseCollections() async {
     // ignore: prefer_final_in_for_each
     for (var database in _projectDatabases) {

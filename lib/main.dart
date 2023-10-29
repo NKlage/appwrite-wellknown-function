@@ -6,8 +6,10 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'src/database_configuration_service.dart';
 import 'src/function_runtime.dart';
 
-// This is your Appwrite function
-// It's executed each time we get a request
+/// Einstiegspunkt der Appwrite Funktion.
+///
+/// The []] is provided by the Open Runtime. More information about the
+/// implementation of the [context] can be found [here](https://github.com/open-runtimes/open-runtimes/blob/main/runtimes/dart-3.0/src/function_types.dart):
 // ignore: inference_failure_on_untyped_parameter, type_annotate_public_apis, avoid_final_parameters
 Future<dynamic> main(final context) async {
   final requestHeaders = context.req.headers as Map<String, dynamic>;

@@ -1,12 +1,14 @@
 import 'collection_response.dart';
 import 'response.dart';
 
-/// Welllknown Database Response
+/// Welllknown database response
 class DatabaseResponse extends Response {
-  /// Default constructor
+  /// Standard constructor for a database response
+  ///
+  /// Holds the [id] and [name] of the Appwrite database
   DatabaseResponse({required super.id, required super.name});
 
-  /// List of Collections in the Database
+  /// List of collections in the database
   final List<CollectionResponse> collections = List.empty(growable: true);
 
   /// Convert to map
