@@ -7,28 +7,32 @@ import 'utils.dart';
 /// [FunctionRuntime] instance
 FunctionRuntime functionRuntime = FunctionRuntime();
 
-/// Function Runtime Configuration
+/// Runtime Configuration
 ///
-/// Get required Function Parameters from Environment
+/// Reads the configuration parameters from the environment variables.
 class FunctionRuntime {
-  /// Key for the environment variables of the API Key for the Appwrite Function
+  /// Name of the environment variable that provides the API key in Appwrite.
+  ///
+  /// Appwrite API Key to read the required Appwrite Objects. The API key should
+  /// have read permission.
   static final apiKey = 'WELLKNOWN_FUNCTION_API_KEY';
 
-  /// Key for the environment variables of the Appwite Endpoint for the Appwrite
-  /// Function
+  /// Name of the environment variable that provides the Appwrite endpoint in
+  /// Appwrite.
   static final endpoint = 'APPWRITE_ENDPOINT';
 
-  /// Key for the environment variables of the Appwrite Project Id for the
-  /// Appwrite Function
+  /// Name of the environment variable that provides the Appwrite project id in
+  /// Appwrite.
   static final projectId = 'APPWRITE_PROJECT_ID';
 
-  /// Request Header that contains a valid Wellknown token to verify Request
+  /// Name of the request header that holds the token to secure the requests.
   static final wkTokenHeaderName = 'x-wk-token';
 
-  /// Token for X-WK-Token request header value
+  /// Name of the environment variable that provides the x-wk-token value/secret in Appwrite.
   static final wkTokenHeaderValue = 'WELLKNOWN_TOKEN';
 
-  /// Minimum Client Version to interact with Appwrite Project
+  /// Name of the environment variable that sets the minimum version of the
+  /// client to detect incompatibilities in the Appwrite project.
   static final wkMinClientVersion = 'WELLKNOWN_MIN_CLIENT_VERSION';
 
   /// Get the Function Runtime Configuration
