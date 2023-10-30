@@ -9,7 +9,6 @@ class WellknownService {
     required FunctionConfiguration configuration,
     required DatabaseConfigurationService databaseConfigurationService,
   }) {
-    // _runtime = runtime;
     _databaseConfigurationService = databaseConfigurationService;
     _response = _response.copyWith(
       minClientVersion: configuration.wkMinimumClientVersion,
@@ -18,9 +17,11 @@ class WellknownService {
     );
   }
 
-  // late FunctionRuntime _runtime;
   late DatabaseConfigurationService _databaseConfigurationService;
   WellknownResponse _response = WellknownResponse.empty();
+
+  /// Get list of errors
+  List<String> errors = List.empty(growable: true);
 
   /// Create client configuration
   ///
@@ -38,7 +39,7 @@ class WellknownService {
         databases: await _databaseConfigurationService.create(),
       );
     } catch (e) {
-      //
+      errors.add(e.toString());
     }
   }
 }
