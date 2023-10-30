@@ -3,8 +3,13 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'configuration_service.dart';
 import 'models/storage_response.dart';
 
+/// Service to create the Appwrite storage configuration
 class StorageConfigurationService
     implements ConfigurationService<StorageResponse> {
+  /// Default Constructor
+  ///
+  /// Requires an Appwrite [Storage] object to read the storage objects
+  /// in the Appwrite project.
   StorageConfigurationService({required Storage storage}) : _storage = storage;
 
   final Storage _storage;

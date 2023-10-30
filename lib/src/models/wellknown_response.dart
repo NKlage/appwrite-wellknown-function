@@ -1,4 +1,5 @@
 import 'database_response.dart';
+import 'function_response.dart';
 import 'storage_response.dart';
 
 /// Represents the wellknown client configuration
@@ -10,8 +11,10 @@ class WellknownResponse {
     required this.endpoint,
     required this.databases,
     required this.storages,
+    required this.functions,
   });
 
+  /// Create empty [WellknownResponse]
   factory WellknownResponse.empty() {
     return WellknownResponse(
       minClientVersion: '',
@@ -19,6 +22,7 @@ class WellknownResponse {
       endpoint: '',
       databases: [],
       storages: [],
+      functions: [],
     );
   }
 
@@ -33,7 +37,12 @@ class WellknownResponse {
 
   /// List of databases in the Appwrite project
   final List<DatabaseResponse> databases;
+
+  /// List of storages in the Appwrite project
   final List<StorageResponse> storages;
+
+  /// List of functions in the Appwrite project
+  final List<FunctionResponse> functions;
 
   /// Convert [WellknownResponse] to Map
   Map<String, dynamic> toMap() {
@@ -43,15 +52,18 @@ class WellknownResponse {
       'endpoint': endpoint,
       'databases': databases.map((e) => e.toMap()).toList(),
       'storages': storages.map((e) => e.toMap()).toList(),
+      'functions': functions.map((e) => e.toMap()).toList(),
     };
   }
 
+  /// Create copy with different values
   WellknownResponse copyWith({
     String? minClientVersion,
     String? projectId,
     String? endpoint,
     List<DatabaseResponse>? databases,
     List<StorageResponse>? storages,
+    List<FunctionResponse>? functions,
   }) {
     return WellknownResponse(
       minClientVersion: minClientVersion ?? this.minClientVersion,
@@ -59,6 +71,7 @@ class WellknownResponse {
       endpoint: endpoint ?? this.endpoint,
       databases: databases ?? this.databases,
       storages: storages ?? this.storages,
+      functions: functions ?? this.functions,
     );
   }
 }

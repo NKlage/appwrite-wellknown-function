@@ -1,11 +1,17 @@
+import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:starter_template/src/database_configuration_service.dart';
+import 'package:starter_template/src/function_configuration_service.dart';
 import 'package:starter_template/src/function_runtime.dart';
 import 'package:starter_template/src/models/database_response.dart';
+import 'package:starter_template/src/models/function_response.dart';
 import 'package:starter_template/src/models/storage_response.dart';
 import 'package:starter_template/src/storage_configuration_service.dart';
 import 'package:starter_template/src/wellknown_service.dart';
 import 'package:test/test.dart';
+
+import 'wellknown_service_test.mocks.dart';
 
 class MockDatabaseConfigurationService extends Mock
     implements DatabaseConfigurationService {
@@ -29,6 +35,7 @@ class MockStorageConfigurationService extends Mock
   }
 }
 
+@GenerateMocks([FunctionConfigurationService, Functions])
 void main() {
   test('should create full wellknown response', () async {
     // Arrange
@@ -56,10 +63,34 @@ void main() {
       ],
     );
 
+    final mockFunctionConfigurationService = MockFunctionConfigurationService();
+
+    final functionResponseList = [
+      FunctionResponse(
+        id: '4711',
+        name: 'First Function',
+        timeout: 15,
+      ),
+      FunctionResponse(
+        id: '4712',
+        name: 'Second Function',
+        timeout: 15,
+      ),
+      FunctionResponse(
+        id: '4713',
+        name: 'Third Function',
+        timeout: 15,
+      ),
+    ];
+
+    when(mockFunctionConfigurationService.create()).thenAnswer(
+      (_) => Future.value(functionResponseList),
+    );
     final sut = WellknownService(
       configuration: mockFunctionConfiguration,
       databaseConfigurationService: mockDatabaseConfigurationService,
       storageConfigurationService: mockStorageConfigurationService,
+      functionConfigurationService: mockFunctionConfigurationService,
     );
 
     // Act
@@ -71,5 +102,6 @@ void main() {
     expect(wellknownResponse.minClientVersion, '1.2.3');
     expect(wellknownResponse.databases.length, 3);
     expect(wellknownResponse.storages.length, 2);
+    expect(wellknownResponse.functions.length, 3);
   });
 }
