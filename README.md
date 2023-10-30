@@ -46,6 +46,16 @@ Sample `200` Response:
         }
       ]
     }
+  ],
+  "storages": [
+    {
+      "id": "653d91b80af69a5a9b8b",
+      "name": "Storage 1"
+    },
+    {
+      "id": "654002655f0f36100037",
+      "name": "Storage 2"
+    }
   ]
 }
 ```
@@ -72,12 +82,23 @@ return empty body
 | Permissions       | `any`           |
 | Timeout (Seconds) | 15              |
 
-## 🔒 Environment Variables
+## 🔓API Key Permissions
 
+Required permissions for `WELLKNOWN_FUNCTION_API_KEY`
+
+| Object   | Permission       | Required |
+|----------|------------------|:--------:|
+| Database | databases.read   |   [x]    |
+|          | collections.read |   [x]    |
+| Storage  | buckets.read     |   [x]    |
+
+
+
+## 🔒Environment Variables
 
 | Variable                     | Description                                                                                           |
 |------------------------------|-------------------------------------------------------------------------------------------------------|
-| WELLKNOWN_FUNCTION_API_KEY   | Appwrite API Key with read Permissions to Databases                                                   |
+| WELLKNOWN_FUNCTION_API_KEY   | Appwrite API Key with read Permissions to Databases, Storage                                          |
 | APPWRITE_ENDPOINT            | Appwrite endpoint for the Appwrite client in the Wellknown Function e.g. https://cloud.appwrite.io/v1 |
 | APPWRITE_PROJECT_ID          | Project Id for the Appwrite Client in the Wellknown Function                                          |
 | WELLKNOWN_TOKEN              | Expected token in the `x-wk-token` Header                                                             |
