@@ -14,6 +14,7 @@ class WellknownResponse {
     required this.functions,
   });
 
+  /// Create empty [WellknownResponse]
   factory WellknownResponse.empty() {
     return WellknownResponse(
       minClientVersion: '',
@@ -36,7 +37,11 @@ class WellknownResponse {
 
   /// List of databases in the Appwrite project
   final List<DatabaseResponse> databases;
+
+  /// List of storages in the Appwrite project
   final List<StorageResponse> storages;
+
+  /// List of functions in the Appwrite project
   final List<FunctionResponse> functions;
 
   /// Convert [WellknownResponse] to Map
@@ -51,6 +56,7 @@ class WellknownResponse {
     };
   }
 
+  /// Create copy with different values
   WellknownResponse copyWith({
     String? minClientVersion,
     String? projectId,

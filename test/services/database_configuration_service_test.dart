@@ -44,11 +44,7 @@ void main() {
     );
 
     when(
-      mockDatabase.list(
-        queries: [
-          Query.equal('enabled', true),
-        ],
-      ),
+      mockDatabase.list(),
     ).thenAnswer((_) => Future.value(databaseList));
 
     when(

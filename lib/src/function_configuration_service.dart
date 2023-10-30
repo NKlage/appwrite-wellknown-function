@@ -3,8 +3,13 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'configuration_service.dart';
 import 'models/function_response.dart';
 
+/// Service to create the Appwrite functions configuration
 class FunctionConfigurationService
     implements ConfigurationService<FunctionResponse> {
+  /// Default Constructor
+  ///
+  /// Requires an Appwrite [Functions] object to read the functions
+  /// in the Appwrite project.
   FunctionConfigurationService({required Functions functions})
       : _functions = functions;
 
