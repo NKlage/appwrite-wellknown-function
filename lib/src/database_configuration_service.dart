@@ -32,6 +32,9 @@ class DatabaseConfigurationService
     final databases = await _databases.list();
 
     for (final db in databases.databases) {
+      if (!db.enabled) {
+        continue;
+      }
       _projectDatabases.add(DatabaseResponse(id: db.$id, name: db.name));
     }
   }
@@ -45,6 +48,9 @@ class DatabaseConfigurationService
       );
 
       for (final collection in collectionList.collections) {
+        if (!collection.enabled) {
+          continue;
+        }
         database.collections.add(
           CollectionResponse(
             id: collection.$id,
