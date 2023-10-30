@@ -13,9 +13,9 @@ class DatabaseResponse extends Response {
 
   /// Convert to map
   @override
-  Map<String, dynamic> toJson() {
-    final databaseCollections = collections.map((e) => e.toJson()).toList();
-    final database = super.toJson()
+  Map<String, dynamic> toMap() {
+    final databaseCollections = collections.map((e) => e.toMap()).toList();
+    final database = super.toMap()
       ..putIfAbsent(
         'collections',
         () => databaseCollections,

@@ -5,6 +5,7 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 
 import 'src/database_configuration_service.dart';
 import 'src/function_runtime.dart';
+import 'src/wellknown_service.dart';
 
 /// Appwrite function entrypoint
 ///
@@ -29,19 +30,15 @@ Future<dynamic> main(final context) async {
     return context.res.send('', 404);
   }
 
-  final databaseService = DatabaseConfigurationService(
-    databases: Databases(functionRuntime.client),
+  final appwriteClient = functionRuntime.client;
+
+  final service = WellknownService(
+    configuration: functionRuntime.configuration,
+    databaseConfigurationService: DatabaseConfigurationService(
+      databases: Databases(appwriteClient),
+    ),
   );
+  final response = await service.create();
 
-  final dbConfiguration = await databaseService.create();
-  final map = dbConfiguration.map((e) => e.toJson()).toList();
-  context.log('dbConfiguration: $map');
-
-  final result = {
-    'min_client_version': functionRuntime.configuration.wkMinimumClientVersion,
-    'endpoint': functionRuntime.configuration.endpoint,
-    'databases': map,
-  };
-
-  return context.res.json(result);
+  return context.res.json(response.toMap());
 }

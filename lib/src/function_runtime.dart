@@ -15,25 +15,25 @@ class FunctionRuntime {
   ///
   /// Appwrite API Key to read the required Appwrite Objects. The API key should
   /// have read permission.
-  static final apiKey = 'WELLKNOWN_FUNCTION_API_KEY';
+  static const apiKey = 'WELLKNOWN_FUNCTION_API_KEY';
 
   /// Name of the environment variable that provides the Appwrite endpoint in
   /// Appwrite.
-  static final endpoint = 'APPWRITE_ENDPOINT';
+  static const endpoint = 'APPWRITE_ENDPOINT';
 
   /// Name of the environment variable that provides the Appwrite project id in
   /// Appwrite.
-  static final projectId = 'APPWRITE_PROJECT_ID';
+  static const projectId = 'APPWRITE_PROJECT_ID';
 
   /// Name of the request header that holds the token to secure the requests.
-  static final wkTokenHeaderName = 'x-wk-token';
+  static const wkTokenHeaderName = 'x-wk-token';
 
   /// Name of the environment variable that provides the x-wk-token value/secret in Appwrite.
-  static final wkTokenHeaderValue = 'WELLKNOWN_TOKEN';
+  static const wkTokenHeaderValue = 'WELLKNOWN_TOKEN';
 
   /// Name of the environment variable that sets the minimum version of the
   /// client to detect incompatibilities in the Appwrite project.
-  static final wkMinClientVersion = 'WELLKNOWN_MIN_CLIENT_VERSION';
+  static const wkMinClientVersion = 'WELLKNOWN_MIN_CLIENT_VERSION';
 
   /// Get the Function Runtime Configuration
   FunctionConfiguration get configuration => _configuration();

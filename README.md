@@ -15,6 +15,7 @@ Sample `200` Response:
 ```json
 {
   "min_client_version": "1.5.6",
+  "project_id": "653e6279d0fe7c6ca484",
   "endpoint": "https://cloud.appwrite.local/v1",
   "databases": [
     {
