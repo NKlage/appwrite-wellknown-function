@@ -12,7 +12,7 @@ abstract class Response {
   final String name;
 
   /// convert [Response] to Map
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         'id': id,
         'name': name,
       };
