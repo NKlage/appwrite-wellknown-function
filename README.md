@@ -56,6 +56,18 @@ Sample `200` Response:
       "id": "654002655f0f36100037",
       "name": "Storage 2"
     }
+  ],
+  "functions": [
+    {
+      "id": "653556c80fad76eb795c",
+      "name": "Database Migrations",
+      "timeout": 15
+    },
+    {
+      "id": "653948a483436d79ace8",
+      "name": "wellknown",
+      "timeout": 15
+    }
   ]
 }
 ```
@@ -86,11 +98,12 @@ return empty body
 
 Required permissions for `WELLKNOWN_FUNCTION_API_KEY`
 
-| Object   | Permission       | Required |
-|----------|------------------|:--------:|
-| Database | databases.read   |   [x]    |
-|          | collections.read |   [x]    |
-| Storage  | buckets.read     |   [x]    |
+| Object    | Permission       | Required |
+|-----------|------------------|:--------:|
+| Database  | databases.read   |   [x]    |
+|           | collections.read |   [x]    |
+| Storage   | buckets.read     |   [x]    |
+| Functions | functions.read   |   [x]    |
 
 
 

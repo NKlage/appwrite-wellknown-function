@@ -1,4 +1,5 @@
 import 'database_response.dart';
+import 'function_response.dart';
 import 'storage_response.dart';
 
 /// Represents the wellknown client configuration
@@ -10,6 +11,7 @@ class WellknownResponse {
     required this.endpoint,
     required this.databases,
     required this.storages,
+    required this.functions,
   });
 
   factory WellknownResponse.empty() {
@@ -19,6 +21,7 @@ class WellknownResponse {
       endpoint: '',
       databases: [],
       storages: [],
+      functions: [],
     );
   }
 
@@ -34,6 +37,7 @@ class WellknownResponse {
   /// List of databases in the Appwrite project
   final List<DatabaseResponse> databases;
   final List<StorageResponse> storages;
+  final List<FunctionResponse> functions;
 
   /// Convert [WellknownResponse] to Map
   Map<String, dynamic> toMap() {
@@ -43,6 +47,7 @@ class WellknownResponse {
       'endpoint': endpoint,
       'databases': databases.map((e) => e.toMap()).toList(),
       'storages': storages.map((e) => e.toMap()).toList(),
+      'functions': functions.map((e) => e.toMap()).toList(),
     };
   }
 
@@ -52,6 +57,7 @@ class WellknownResponse {
     String? endpoint,
     List<DatabaseResponse>? databases,
     List<StorageResponse>? storages,
+    List<FunctionResponse>? functions,
   }) {
     return WellknownResponse(
       minClientVersion: minClientVersion ?? this.minClientVersion,
@@ -59,6 +65,7 @@ class WellknownResponse {
       endpoint: endpoint ?? this.endpoint,
       databases: databases ?? this.databases,
       storages: storages ?? this.storages,
+      functions: functions ?? this.functions,
     );
   }
 }

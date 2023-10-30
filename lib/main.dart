@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:dart_appwrite/dart_appwrite.dart';
 
 import 'src/database_configuration_service.dart';
+import 'src/function_configuration_service.dart';
 import 'src/function_runtime.dart';
 import 'src/storage_configuration_service.dart';
 import 'src/wellknown_service.dart';
@@ -40,6 +41,9 @@ Future<dynamic> main(final context) async {
     ),
     storageConfigurationService: StorageConfigurationService(
       storage: Storage(appwriteClient),
+    ),
+    functionConfigurationService: FunctionConfigurationService(
+      functions: Functions(appwriteClient),
     ),
   );
 
