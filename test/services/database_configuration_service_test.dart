@@ -23,13 +23,6 @@ void main() {
           $updatedAt: 'updatedAt',
           enabled: true,
         ),
-        Database(
-          $id: 'id',
-          name: 'name',
-          $createdAt: 'createdAt',
-          $updatedAt: 'updatedAt',
-          enabled: false,
-        ),
       ],
     );
     final collectionList = CollectionList(
@@ -47,25 +40,25 @@ void main() {
           attributes: [],
           indexes: [],
         ),
-        Collection(
-          $id: 'id',
-          $createdAt: 'createdAt',
-          $updatedAt: 'updatedAt',
-          $permissions: ['permissions'],
-          databaseId: 'databaseId',
-          name: 'name',
-          enabled: false,
-          documentSecurity: false,
-          attributes: [],
-          indexes: [],
-        ),
       ],
     );
 
-    when(mockDatabase.list()).thenAnswer((_) => Future.value(databaseList));
+    when(
+      mockDatabase.list(
+        queries: [
+          Query.equal('enabled', true),
+        ],
+      ),
+    ).thenAnswer((_) => Future.value(databaseList));
 
-    when(mockDatabase.listCollections(databaseId: anyNamed('databaseId')))
-        .thenAnswer((_) => Future.value(collectionList));
+    when(
+      mockDatabase.listCollections(
+        databaseId: anyNamed('databaseId'),
+        queries: [
+          Query.equal('enabled', true),
+        ],
+      ),
+    ).thenAnswer((_) => Future.value(collectionList));
 
     // Act
     final databaseResponseList = await sut.create();
