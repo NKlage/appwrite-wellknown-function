@@ -2,6 +2,8 @@ import 'package:mockito/mockito.dart';
 import 'package:starter_template/src/database_configuration_service.dart';
 import 'package:starter_template/src/function_runtime.dart';
 import 'package:starter_template/src/models/database_response.dart';
+import 'package:starter_template/src/models/storage_response.dart';
+import 'package:starter_template/src/storage_configuration_service.dart';
 import 'package:starter_template/src/wellknown_service.dart';
 import 'package:test/test.dart';
 
@@ -12,6 +14,17 @@ class MockDatabaseConfigurationService extends Mock
 
   @override
   Future<List<DatabaseResponse>> create() async {
+    return Future.value(createResponse);
+  }
+}
+
+class MockStorageConfigurationService extends Mock
+    implements StorageConfigurationService {
+  MockStorageConfigurationService({required this.createResponse});
+  final List<StorageResponse> createResponse;
+
+  @override
+  Future<List<StorageResponse>> create() async {
     return Future.value(createResponse);
   }
 }
@@ -36,9 +49,17 @@ void main() {
       ],
     );
 
+    final mockStorageConfigurationService = MockStorageConfigurationService(
+      createResponse: [
+        StorageResponse(id: 'id1', name: 'First Storage'),
+        StorageResponse(id: 'id2', name: 'Second Storage'),
+      ],
+    );
+
     final sut = WellknownService(
       configuration: mockFunctionConfiguration,
       databaseConfigurationService: mockDatabaseConfigurationService,
+      storageConfigurationService: mockStorageConfigurationService,
     );
 
     // Act
@@ -49,5 +70,6 @@ void main() {
     expect(wellknownResponse.projectId, '653e8b662406667470e2');
     expect(wellknownResponse.minClientVersion, '1.2.3');
     expect(wellknownResponse.databases.length, 3);
+    expect(wellknownResponse.storages.length, 2);
   });
 }

@@ -5,6 +5,7 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 
 import 'src/database_configuration_service.dart';
 import 'src/function_runtime.dart';
+import 'src/storage_configuration_service.dart';
 import 'src/wellknown_service.dart';
 
 /// Appwrite function entrypoint
@@ -37,7 +38,11 @@ Future<dynamic> main(final context) async {
     databaseConfigurationService: DatabaseConfigurationService(
       databases: Databases(appwriteClient),
     ),
+    storageConfigurationService: StorageConfigurationService(
+      storage: Storage(appwriteClient),
+    ),
   );
+
   final response = await service.create();
 
   return context.res.json(response.toMap());

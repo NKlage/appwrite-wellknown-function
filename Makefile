@@ -5,7 +5,8 @@ watch-build-runner:
 	dart pub run build_runner watch --delete-conflicting-outputs
 
 lint:
-	dart analyse
+	dart analyze
 
 tests:
+	make build-runner
 	dart test

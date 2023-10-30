@@ -1,6 +1,7 @@
 import 'database_configuration_service.dart';
 import 'function_runtime.dart';
 import 'models/wellknown_response.dart';
+import 'storage_configuration_service.dart';
 
 /// Service to read the Appwrite Objects and creates a Wellknown configuration
 class WellknownService {
@@ -8,8 +9,10 @@ class WellknownService {
   WellknownService({
     required FunctionConfiguration configuration,
     required DatabaseConfigurationService databaseConfigurationService,
+    required StorageConfigurationService storageConfigurationService,
   }) {
     _databaseConfigurationService = databaseConfigurationService;
+    _storageConfigurationService = storageConfigurationService;
     _response = _response.copyWith(
       minClientVersion: configuration.wkMinimumClientVersion,
       projectId: configuration.projectId,
@@ -18,6 +21,7 @@ class WellknownService {
   }
 
   late DatabaseConfigurationService _databaseConfigurationService;
+  late StorageConfigurationService _storageConfigurationService;
   WellknownResponse _response = WellknownResponse.empty();
 
   /// Get list of errors
@@ -29,6 +33,7 @@ class WellknownService {
   /// [WellknownResponse] object
   Future<WellknownResponse> create() async {
     await _readDatabases();
+    await _readStorage();
     return _response;
   }
 
@@ -37,6 +42,16 @@ class WellknownService {
     try {
       _response = _response.copyWith(
         databases: await _databaseConfigurationService.create(),
+      );
+    } catch (e) {
+      errors.add(e.toString());
+    }
+  }
+
+  Future<void> _readStorage() async {
+    try {
+      _response = _response.copyWith(
+        storages: await _storageConfigurationService.create(),
       );
     } catch (e) {
       errors.add(e.toString());
